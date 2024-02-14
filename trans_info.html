@@ -1,0 +1,20 @@
+<html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<body>
+<h1>Информация о транзакции с хешом: {{transaction["hash"]}}</h1>
+<table>
+{% for key in transaction.keys(): %}
+		<tr><td>{{key}} </td>
+		{%if key == "time"%}
+			<td>{{datetime.fromtimestamp(transaction[key])}}</td>
+		{%else%}
+			<td>{{transaction[key]}}</td>
+		{%endif%}
+		</tr>
+{% endfor %}
+</table>
+<a href="#" onclick="history.back();">Назад</a>
+<a href="{{url_for('home')}}">На главную</a>
+</body>
+</html>

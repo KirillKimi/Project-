@@ -1,0 +1,43 @@
+<html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<body>
+<h1>Курсы биткойна</h1>
+
+
+<ul>
+	<li> 
+    	RUB: 1 &#8383; = {{prices["RUB"].p15min}} &#8381;
+	</li> 
+    <li> 
+    	USD: 1 &#8383; = {{prices["USD"].p15min}} $
+	</li> 
+	<li> 
+    	EUR: 1 &#8383; = {{prices["EUR"].p15min}} &euro;
+	</li> 
+	<li> 
+    	CNY: 1 &#8383; = {{prices["CNY"].p15min}} &#65509;
+	</li> 
+</ul>
+<h1>Информация о последнем блокчейне</h1>
+<table>
+    {% for key in last_block.keys(): %}
+	 <tr><td>{{key}}</td>
+	 {%if key == "time"%}
+	 <td>{{datetime.fromtimestamp(last_block[key])}}</td>
+	 {%else%}
+	 <td>{{last_block[key]}}</td>
+	 {%endif%}
+	 <tr>
+	{% endfor %}
+</table>
+<h1>Информация о предыдущих блоках</h1>
+<table>
+	{% for block in pre_blocks: %}
+	<tr><td> 
+    <a href="{{url_for('block_info', block_hash = block)}}">{{block}}</a>
+	</td></tr>
+	{% endfor %}
+</table>
+</body>
+</html>

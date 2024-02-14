@@ -1,0 +1,17 @@
+<html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<body>
+<h1>Информация о блоке с хешом: {{block["hash"]}}</h1>
+<table>
+<tr><td>nonce </td><td> {{block["nonce"]}} </td></tr>
+<tr><td>time </td><td> {{datetime.fromtimestamp(block["time"])}} </td></tr>
+<tr><td>size </td><td> {{block["size"]}} </td></tr>
+<tr><td>height </td><td> {{block["height"]}} </td></tr>
+{%for i in range(4)%}
+<tr><td>транзакция {{i}} </td><td> <a href="{{url_for('transaction_info', trans_hash = block["tx"][i]["hash"])}}">{{block["tx"][i]["hash"]}} </a> </td></tr>
+{%endfor%}
+</table>
+<a href="{{url_for('home')}}">Назад</a>
+</body>
+</html>
